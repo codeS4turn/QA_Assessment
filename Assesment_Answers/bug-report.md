@@ -24,7 +24,137 @@ Critical
 Priority
 High
 Evidence
-Postman screenshots showing Business A's authentication, Business B's quote ID, the create-delivery request, the 200 OK response, and the resulting draft delivery details.
+Request A
+curl --location 'http://localhost:4000/api/v1/deliveries' \
+--header 'Authorization: Bearer efb05beea34b73e6436c98672b9af3a3' \
+--header 'Content-Type: application/json' \
+--header 'Idempotency-Key: qa-delivery-001' \
+--data '{
+  "pickup": {
+    "name": "string",
+    "phone": "08031234567",
+    "address": "string"
+  },
+  "dropoff": {
+    "name": "string",
+    "phone": "08031234567",
+    "address": "string"
+  },
+  "package": {
+    "description": "string",
+    "weight_kg": 0.1
+  },
+  "quote_id": "quo_4540af365e0e"
+}'
+
+Response:
+{
+    "id": "del_04ed26b066a1",
+    "business_id": "biz_1",
+    "status": "draft",
+    "fee": 1520,
+    "currency": "NGN",
+    "pickup": {
+        "name": "string",
+        "phone": "08031234567",
+        "address": "string"
+    },
+    "dropoff": {
+        "name": "string",
+        "phone": "08031234567",
+        "address": "string"
+    },
+    "package": {
+        "description": "string",
+        "weight_kg": 0.1
+    },
+    "courier_id": null,
+    "created_at": "2026-11-16T13:02:27.715Z",
+    "history": [
+        {
+            "at": "2026-11-16T13:02:27.715Z",
+            "status": "draft"
+        },
+        {
+            "at": "2026-11-16T13:02:48.951Z",
+            "status": "pending"
+        },
+        {
+            "at": "2026-11-16T13:03:45.553Z",
+            "status": "assigned"
+        },
+        {
+            "at": "2026-11-16T13:04:00.672Z",
+            "status": "picked_up"
+        }
+    ]
+}
+
+curl --location 'http://localhost:4000/api/v1/deliveries' \
+--header 'Authorization: Bearer efb05beea34b73e6436c98672b9af3a3' \
+--header 'Content-Type: application/json' \
+--header 'Idempotency-Key: qa-delivery-001' \
+--data '{
+  "pickup": {
+    "name": "string",
+    "phone": "08031234567",
+    "address": "string"
+  },
+  "dropoff": {
+    "name": "string",
+    "phone": "08031234567",
+    "address": "string"
+  },
+  "package": {
+    "description": "string",
+    "weight_kg": 0.1
+  },
+  "quote_id": "quo_4540af365e0e"
+}'
+
+
+Response:
+{
+    "id": "del_04ed26b066a1",
+    "business_id": "biz_1",
+    "status": "draft",
+    "fee": 1520,
+    "currency": "NGN",
+    "pickup": {
+        "name": "string",
+        "phone": "08031234567",
+        "address": "string"
+    },
+    "dropoff": {
+        "name": "string",
+        "phone": "08031234567",
+        "address": "string"
+    },
+    "package": {
+        "description": "string",
+        "weight_kg": 0.1
+    },
+    "courier_id": null,
+    "created_at": "2026-11-16T13:02:27.715Z",
+    "history": [
+        {
+            "at": "2026-11-16T13:02:27.715Z",
+            "status": "draft"
+        },
+        {
+            "at": "2026-11-16T13:02:48.951Z",
+            "status": "pending"
+        },
+        {
+            "at": "2026-11-16T13:03:45.553Z",
+            "status": "assigned"
+        },
+        {
+            "at": "2026-11-16T13:04:00.672Z",
+            "status": "picked_up"
+        }
+    ]
+}
 
 Severity justification: Critical because one business can access and use another business's quote, potentially compromising data ownership and delivery transaction integrity.
 Priority justification: High because this is an authorization vulnerability in the core delivery creation workflow and should be fixed before production release.
