@@ -162,10 +162,11 @@ Priority justification: High because this is an authorization vulnerability in t
 
 Bug report 2: Improper Error Message for malformed or missing package weight 
 
-Field
-Details
+Details:
+
 Environment
 Delivery Sandbox API – Local (http://localhost:4000), tested via Postman
+
 Preconditions
 An authenticated business account is available.
 Steps to reproduce
@@ -175,6 +176,7 @@ Steps to reproduce
 4. Repeat with a text value such as "heavy".
 5. Repeat with another invalid non-numeric value.
 6. Inspect the API response and validation error message.
+
 Expected result
 The API should reject invalid weight values and return a clear, meaningful validation message explaining the accepted weight range, for example: "Weight must be between 0.1kg and 50kg."
 Actual result
@@ -183,8 +185,9 @@ Severity
 Medium
 Priority
 Medium
-Evidence
-Postman screenshots showing the invalid request payload, response status code, and actual error response/message.
+
+Evidence:
+Screen Shot in Test Report
 
 Severity justification: Medium because validation works, but poor error feedback affects usability and makes it difficult for users to understand and correct invalid input.
 Priority justification: Medium because the issue does not prevent backend validation but should be fixed to improve error handling and user experience.
@@ -214,8 +217,7 @@ High
 Priority
 High
 Evidence
-Postman request/response screenshots showing the missing or invalid address fields, response status codes, and response bodies.
-
+ScreenShot in Bug report
 Severity justification: High because invalid location data can result in incorrect delivery routes, failed deliveries, and operational losses.
 Priority justification: High because delivery location accuracy is essential to the core delivery workflow.
 
